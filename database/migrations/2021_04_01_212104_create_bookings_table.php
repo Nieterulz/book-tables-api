@@ -16,18 +16,21 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
 
+            $table->string('client_name')
+                ->comment('Customer name of the booking');
+
             $table->string('code')
                 ->unique()
-                ->comment('Code identifier of the book');
+                ->comment('Code identifier of the booking');
 
             $table->date('date')
-                ->comment('Date of the book');
+                ->comment('Date of the booking');
 
             $table->unsignedInteger('persons')
-                ->comment('Number of diners of the book');
+                ->comment('Number of persons of the booking');
 
             $table->unsignedBigInteger('table_id')
-                ->comment('Table related to the book');
+                ->comment('Table related to the booking');
 
             $table->foreign('table_id')
                 ->references('id')

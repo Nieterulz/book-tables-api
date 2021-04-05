@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\TableController;
 use App\Models\Table;
 use Illuminate\Http\Request;
@@ -16,6 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/tables', [TableController::class, 'index']);
-Route::post('/table', [TableController::class, 'store']);
-Route::delete('/table/{id}', [TableController::class, 'delete']);
+Route::prefix('tables')->group(function () {
+    Route::post('/', [TableController::class, 'store']);
+    Route::get('/availability', [TableController::class, 'availability']);
+    Route::delete('/{code}', [TableController::class, 'destroy']);
+});
+
+Route::prefix('bookings')->group(function () {
+    Route::post('/', [BookingController::class, 'store']);
+    Route::delete('/{code}', [BookingController::class, 'destroy']);
+});
