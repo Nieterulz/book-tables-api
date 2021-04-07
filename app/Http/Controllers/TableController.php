@@ -28,7 +28,7 @@ class TableController extends Controller
             'max_capacity' => $request->get('max_capacity'),
         ]);
 
-        return response()->json($table);
+        return response()->json($table, 201);
     }
 
     /**
